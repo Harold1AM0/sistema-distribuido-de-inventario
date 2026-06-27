@@ -28,8 +28,16 @@ public class ProductoController {
     }
 
     @PostMapping
+
     public Producto guardarProducto(@RequestBody Producto producto) {
         return productoService.guardarProducto(producto);
+    }
+
+    @PutMapping("/{id}")
+    public Producto actualizarProducto(@PathVariable Long id,
+                                       @RequestBody Producto producto) {
+
+        return productoService.actualizarProducto(id, producto);
     }
 
     @DeleteMapping("/{id}")
