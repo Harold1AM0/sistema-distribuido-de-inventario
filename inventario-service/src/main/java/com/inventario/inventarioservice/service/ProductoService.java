@@ -3,6 +3,8 @@ package com.inventario.inventarioservice.service;
 import com.inventario.inventarioservice.entity.Producto;
 import com.inventario.inventarioservice.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
+import com.inventario.inventarioservice.dto.VentaDTO;
+import java.time.LocalDate;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +13,13 @@ import java.util.Optional;
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
+    private final ReporteServiceClient reporteServiceClient;
 
-    public ProductoService(ProductoRepository productoRepository) {
+    public ProductoService(ProductoRepository productoRepository,
+                           ReporteServiceClient reporteServiceClient) {
+
         this.productoRepository = productoRepository;
+        this.reporteServiceClient = reporteServiceClient;
     }
 
     public List<Producto> listarProductos() {
@@ -48,5 +54,32 @@ public class ProductoService {
         }
 
         return null;
+    }
+
+    public String registrarVenta(Long productoId, Integer cantidad) {
+
+        Optional<Producto> productoOptional = productoRepository.findById(productoId);
+
+        if (productoOptional.isEmpty()) {
+            return "Producto no encontrado";
+        }
+
+        Producto producto = productoOptional.get();
+
+        if (producto.getStock() < cantidad) {
+            return "Stock insuficiente";
+        }
+
+        producto.setStock(producto.getStock() - cantidad);
+        productoRepository.save(producto);
+
+        VentaDTO ventaDTO = new VentaDTO();
+        ventaDTO.setProductoId(productoId);
+        ventaDTO.setCantidad(cantidad);
+        ventaDTO.setFecha(LocalDate.now());
+
+        reporteServiceClient.registrarVenta(ventaDTO);
+
+        return "Venta registrada correctamente";
     }
 }

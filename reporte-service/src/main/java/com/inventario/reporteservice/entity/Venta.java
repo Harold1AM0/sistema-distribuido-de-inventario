@@ -8,14 +8,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
+import jakarta.persistence.Table;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table (name = "venta")
 public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

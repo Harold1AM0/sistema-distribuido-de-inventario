@@ -3,6 +3,7 @@ package com.inventario.inventarioservice.controller;
 import com.inventario.inventarioservice.entity.Producto;
 import com.inventario.inventarioservice.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
+import com.inventario.inventarioservice.dto.RegistrarVentaDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,5 +44,15 @@ public class ProductoController {
     @DeleteMapping("/{id}")
     public void eliminarProducto(@PathVariable Long id) {
         productoService.eliminarProducto(id);
+    }
+
+    @PostMapping("/ventas")
+    public String registrarVenta(@RequestBody RegistrarVentaDTO venta) {
+
+        return productoService.registrarVenta(
+                venta.getProductoId(),
+                venta.getCantidad()
+        );
+
     }
 }
