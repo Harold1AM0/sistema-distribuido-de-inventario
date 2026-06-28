@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+
+  inventario-service:
+    build: ./inventario-service
+    container_name: inventario-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - reporte-service
+
+  reporte-service:
+    build: ./reporte-service
+    container_name: reporte-service
+    ports:
+      - "8081:8081"

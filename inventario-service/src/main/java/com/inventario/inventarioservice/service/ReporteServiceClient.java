@@ -15,7 +15,7 @@ public class ReporteServiceClient {
 
     public void registrarVenta(VentaDTO ventaDTO) {
 
-        String url = "http://localhost:8081/ventas";
+        String url = "http://reporte-service:8081/ventas";
 
         restTemplate.postForObject(url, ventaDTO, Void.class);
 
