@@ -77,7 +77,7 @@ public class ProductoService {
         ventaDTO.setProductoId(productoId);
         ventaDTO.setCantidad(cantidad);
         ventaDTO.setFecha(LocalDate.now());
-        
+
         boolean reporteRegistrado = reporteServiceClient.registrarVenta(ventaDTO);
 
         if (reporteRegistrado) {
