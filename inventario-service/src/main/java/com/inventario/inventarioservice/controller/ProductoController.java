@@ -54,7 +54,6 @@ public class ProductoController {
         );
     }
 
-    // Endpoint para identificar qué instancia atendió la petición
     @GetMapping("/instancia")
     public String obtenerInstancia() {
         return "Servidor: " + System.getenv("HOSTNAME");
