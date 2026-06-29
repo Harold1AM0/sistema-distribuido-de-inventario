@@ -11,7 +11,7 @@ services:
 
   mysql-reporte:
     image: mysql:8.0
-    container_name: mysql_reporte
+    container_name: mysql-reporte
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: reporte_db
