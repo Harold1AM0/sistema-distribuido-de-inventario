@@ -2,6 +2,7 @@ services:
 
   mysql-inventario:
     image: mysql:8.0
+    container_name: mysql-inventario
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: inventario_db
@@ -10,6 +11,7 @@ services:
 
   mysql-reporte:
     image: mysql:8.0
+    container_name: mysql_reporte
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: reporte_db
@@ -30,6 +32,7 @@ services:
 
   reporte-service:
     build: ./reporte-service
+    container_name: reporte-service
     ports:
       - "8081:8081"
     depends_on:
