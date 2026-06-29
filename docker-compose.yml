@@ -24,18 +24,6 @@ services:
       - mysql-inventario
       - reporte-service
 
-  inventario-service-2:
-    build: ./inventario-service
-    depends_on:
-      - mysql-inventario
-      - reporte-service
-
-  inventario-service-3:
-    build: ./inventario-service
-    depends_on:
-      - mysql-inventario
-      - reporte-service
-
   reporte-service:
     build: ./reporte-service
     container_name: reporte-service
@@ -52,5 +40,3 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - inventario-service-1
-      - inventario-service-2
-      - inventario-service-3
