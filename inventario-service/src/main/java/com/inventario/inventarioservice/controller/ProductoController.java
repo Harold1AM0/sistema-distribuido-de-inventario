@@ -1,9 +1,9 @@
 package com.inventario.inventarioservice.controller;
 
+import com.inventario.inventarioservice.dto.RegistrarVentaDTO;
 import com.inventario.inventarioservice.entity.Producto;
 import com.inventario.inventarioservice.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
-import com.inventario.inventarioservice.dto.RegistrarVentaDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +29,6 @@ public class ProductoController {
     }
 
     @PostMapping
-
     public Producto guardarProducto(@RequestBody Producto producto) {
         return productoService.guardarProducto(producto);
     }
@@ -53,6 +52,11 @@ public class ProductoController {
                 venta.getProductoId(),
                 venta.getCantidad()
         );
+    }
 
+    // Endpoint para identificar qué instancia atendió la petición
+    @GetMapping("/instancia")
+    public String obtenerInstancia() {
+        return "Servidor: " + System.getenv("HOSTNAME");
     }
 }
