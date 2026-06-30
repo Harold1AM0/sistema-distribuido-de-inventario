@@ -62,3 +62,5 @@ services:
     depends_on:
       inventario-service-1:
         condition: service_started
+      inventario-service-2:
+        condition: service_started
