@@ -36,6 +36,14 @@ services:
       reporte-service:
         condition: service_started
 
+  inventario-service-2:
+    build: ./inventario-service
+    depends_on:
+      mysql-inventario:
+        condition: service_healthy
+      reporte-service:
+        condition: service_started
+
   reporte-service:
     build: ./reporte-service
     container_name: reporte-service
